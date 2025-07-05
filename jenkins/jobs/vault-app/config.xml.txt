@@ -1,0 +1,26 @@
+<flow-definition plugin="workflow-job">
+  <description>Pipeline для Vault+Flask</description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps">
+    <script>
+pipeline {
+    agent any
+    stages {
+        stage('Build and Run') {
+            steps {
+                sh 'docker-compose -f docker-compose.yml up --build -d'
+            }
+        }
+    }
+}
+    </script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers>
+	  <hudson.triggers.SCMTrigger>
+		<spec>H/2 * * * *</spec> <!-- опрашивает git раз в 2 минуты -->
+	  </hudson.triggers.SCMTrigger>
+	</triggers>
+  <triggers/>
+</flow-definition>
