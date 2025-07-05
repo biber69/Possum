@@ -5,20 +5,19 @@ import os
 app = Flask(__name__)
 app.secret_key = 'supersecret'
 
-# Vault config
 VAULT_ADDR = os.environ.get("VAULT_ADDR", "http://vault:8200")
 VAULT_TOKEN = os.environ.get("VAULT_TOKEN", "root")
 
 client = hvac.Client(url=VAULT_ADDR, token=VAULT_TOKEN)
 
-TEMPLATE = """
+TEMPLATE = '''
 <!doctype html>
 <title>Vault Key Entry</title>
 <h2>Добавить секрет в Vault</h2>
 <form method=post>
-  <label for="key">Ключ:</label><br>
+  <label>Ключ:</label><br>
   <input type=text name=key required><br><br>
-  <label for="value">Значение:</label><br>
+  <label>Значение:</label><br>
   <input type=text name=value required><br><br>
   <input type=submit value="Сохранить">
 </form>
@@ -31,7 +30,7 @@ TEMPLATE = """
     </ul>
   {% endif %}
 {% endwith %}
-"""
+'''
 
 @app.route('/', methods=['GET', 'POST'])
 def vault_form():
