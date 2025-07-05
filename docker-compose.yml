@@ -1,6 +1,17 @@
 version: '3.8'
 
 services:
+  jenkins:
+    build: ./jenkins
+    container_name: jenkins
+    ports:
+      - "8080:8080"         # Внешний доступ к Jenkins UI
+      - "50000:50000"       # Для Jenkins агент-соединений (если нужно)
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    networks:
+      - vaultnet
+
   vault:
     image: hashicorp/vault:1.15
     container_name: vault
@@ -27,6 +38,9 @@ services:
       - vault
     networks:
       - vaultnet
+
+volumes:
+  jenkins_home:
 
 networks:
   vaultnet:
