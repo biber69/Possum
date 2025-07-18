@@ -13,11 +13,11 @@ client = hvac.Client(url=VAULT_ADDR, token=VAULT_TOKEN)
 TEMPLATE = '''
 <!doctype html>
 <title>Vault Key Entry</title>
-<h2>Добавить секрет в Vault</h2>
+<h2>Add secret in Vault</h2>
 <form method=post>
-  <label>Ключ:</label><br>
+  <label>Key:</label><br>
   <input type=text name=key required><br><br>
-  <label>Значение:</label><br>
+  <label>Value:</label><br>
   <input type=text name=value required><br><br>
   <input type=submit value="Сохранить">
 </form>
@@ -42,7 +42,7 @@ def vault_form():
             secret={'value': value},
             mount_point='secret'
         )
-        flash(f"Секрет '{key}' сохранён в Vault.")
+        flash(f"Secret '{key}' was saved in Vault.")
         return redirect('/')
     return render_template_string(TEMPLATE)
 
