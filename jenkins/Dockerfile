@@ -8,5 +8,6 @@ RUN jenkins-plugin-cli --plugin-file /usr/share/jenkins/ref/plugins.txt
 
 COPY init.groovy.d/ /usr/share/jenkins/ref/init.groovy.d/
 COPY jobs/ /usr/share/jenkins/ref/jobs/
+COPY docker-compose.yml /var/jenkins_home/docker-compose.yml
 
-USER jenkins
+USER root

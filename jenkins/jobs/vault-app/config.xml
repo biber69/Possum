@@ -9,7 +9,7 @@ pipeline {
   stages {
     stage('Deploy Vault and Web') {
       steps {
-        sh 'docker-compose -f docker-compose.yml up --build -d web'
+        sh 'cd /workspace &amp;&amp; docker-compose -f /workspace/docker-compose.yml up --build -d web'
       }
     }
   }
